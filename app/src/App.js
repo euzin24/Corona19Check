@@ -1,23 +1,35 @@
-import logo from './logo.svg';
+import TotalStatus from './component/TotalStatus';
+import ProvincialStatus from './component/ProvincialStatus';
+import VaccinationCenter from './component/VaccinationCenter';
 import './App.css';
 
 function App() {
+  const date = new Date();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <nav className="nav-bar">
+        <p className="app-title">CORONA19Check</p>
+        <ul className="nav-ul">
+          <li className="nav-li"><a href="#total-status">전체 현황</a></li>
+          <li className="nav-li"><a href="#provincial-status">시도별 현황</a></li>
+          <li className="nav-li"><a href="#vaccination">예방접종센터 찾기</a></li>
+        </ul>
+      </nav>
+      <div>
+        <div id="total-status" className="section">
+          <TotalStatus date={date}></TotalStatus>
+        </div>
+        <div id="provincial-status" className="section">
+          <ProvincialStatus date={date}></ProvincialStatus>
+        </div>
+        <div id="vaccination" className="section">
+          <VaccinationCenter></VaccinationCenter>
+        </div>
+      </div>
+      <footer>
+        dlsadlkjwkljd
+      </footer>
     </div>
   );
 }

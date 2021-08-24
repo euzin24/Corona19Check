@@ -131,3 +131,20 @@ p{
   height : auto;
   padding: 1em;
 }
+
+.vc-container {
+  width: 100%;
+  display: inline-block;
+}
+
+.vmap-test {
+  background-color: blanchedalmond;
+  width: 50%;
+  float: left;
+}
+
+.center-list {
+  background-color: rgb(204, 204, 204);
+  width: 50%;
+  float: right;
+}

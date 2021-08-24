@@ -4,12 +4,16 @@ import "flatpickr/dist/themes/airbnb.css";
 import ProvincialStatusData from './ProvincialStatusData';
 
 export default function ProvincialStatus(){
+  console.log("시도별현황 renders")
+
   const sido=["서울", "제주", "경남", "경북", "전남", "전북", "충남", "충북", "강원", "경기", "세종", "울산", "대전", "광주", "인천", "대구", "부산", "강원"];
   const today = new Date();
 
   const [isLoading, setIsLoading] = useState(0)
-  const [stDate, setStDate] = useState(today);
-  const [edDate, setEdDate] = useState(today);
+  let stDate = today;
+  let edDate = today;
+  // const [stDate, setStDate] = useState(today);
+  // const [edDate, setEdDate] = useState(today);
   const lastUpdatedDate = `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`
 
   let selectedSido = "서울"; //default
@@ -18,7 +22,8 @@ export default function ProvincialStatus(){
     selectedSido = e.target.value;
   }
 
-  const btnOnClick = () => {
+  const btnOnClick = e => {
+    e.preventDefault()
     console.log(selectedSido, stDate, edDate)
     setIsLoading(1)
     console.log("loading...")
@@ -34,7 +39,7 @@ export default function ProvincialStatus(){
   }
 
   useEffect(()=>{
-    console.log("provincialStatus renders")
+    console.log("시도별현황 useEffect")
   }, [])
 
   return(
@@ -50,13 +55,13 @@ export default function ProvincialStatus(){
           className="sel-date"
           value={stDate}
           options={{ minDate: "2020-03-02", maxDate: `${edDate.getFullYear()}-${edDate.getMonth()+1}-${edDate.getDate()}` }}
-          onChange={([date])=>setStDate(date)} ></Flatpickr>
+          onChange={([date])=>stDate=date} ></Flatpickr>
         종료일
         <Flatpickr
           className="sel-date"
           value={edDate}
           options={{ minDate: `${stDate.getFullYear()}-${stDate.getMonth()+1}-${stDate.getDate()}`, maxDate: lastUpdatedDate }}
-          onChange={([date])=>setEdDate(date)} ></Flatpickr>
+          onChange={([date])=>edDate=date} ></Flatpickr>
         <button className="sel-btn" onClick={btnOnClick}>확인하기</button>
       </span>
       <div className="ps-board">

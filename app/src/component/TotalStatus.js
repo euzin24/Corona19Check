@@ -1,5 +1,12 @@
+import { useEffect } from "react";
+import { getCovid19InfStateJson } from "../api";
+
 export default function TotalStatus(props){
   const date = props.date
+  console.log("전체현황 renders");
+
+  // getCovid19InfStateJson();
+
 
   return(
     <div className="container" style={{paddingTop:"10em"}}>

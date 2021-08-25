@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function VaccinationCenter(props) {
+const VaccinationCenter = props => {
   // const data = JSON.parse(localStorage.getItem("vaccineCenter"))
   console.log("백신센터 renders")
 
@@ -111,3 +111,5 @@ export default function VaccinationCenter(props) {
     </div>
   );
 }
+
+export default VaccinationCenter;

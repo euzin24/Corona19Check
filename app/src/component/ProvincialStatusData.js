@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export default function ProvincialStatusData(props) {
+const ProvincialStatusData = props =>{
   console.log("시도별현황데이터리스트 renders")
 
   useEffect(()=>{
@@ -13,3 +13,5 @@ export default function ProvincialStatusData(props) {
     </>
   );
 }
+
+export default ProvincialStatusData

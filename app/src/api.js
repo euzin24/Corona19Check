@@ -2,14 +2,19 @@ import axios from "axios";
 
 const API_KEY = "uYetCHN5SYBMH788ybSBRrnDgSo8aTe3vKQQ3EYYIqqWX7TkRXA8k2obhvf5rp5oku7Jgmgz9lgLEuT%2FMnUNiA%3D%3D";
 const CORS_BRIDGED = "https://cors.bridged.cc/"
+const CORS_ANYWHERE = "https://cors-anywhere.herokuapp.com/"
 
-export const getCovid19InfStateJson = async()=>{
+export const getCovid19InfStateJson = async(date)=>{
+    // 유효데이터 2020 01 31
     console.log("전체 현황 axios get")
-    const url = `${CORS_BRIDGED}http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=${API_KEY}&pageNo=1&numOfRows=10&startCreateDt=20200315&endCreateDt=20200315`
+    const today = "" + date.getFullYear()
+                     + ("0" + (1 + date.getMonth())).slice(-2)
+                     + ("0" + date.getDate()).slice(-2)
+    const url = `${CORS_BRIDGED}http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=${API_KEY}&pageNo=1&numOfRows=10&startCreateDt=${today}&endCreateDt=${today}`
     try{
         const res = await axios.get(url);
-        const data = await res.json();
-        console.log(data);
+        console.log(res.data.response.body.items.item)
+        return res.data.response.body.items.item
     }catch(e){
         console.error(e);
     }
@@ -31,6 +36,7 @@ export const getCovid19VaccineCenter = async()=>{
     const url = `${CORS_BRIDGED}https://api.odcloud.kr/api/15077586/v1/centers?page=1&perPage=284&serviceKey=${API_KEY}`
     try{
         const res = await axios.get(url);
+        console.log(res)
         return res.data.data;
     }catch(e){
         console.error(e);

@@ -3,7 +3,7 @@ import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/themes/airbnb.css";
 import ProvincialStatusData from './ProvincialStatusData';
 
-export default function ProvincialStatus(){
+const ProvincialStatus = ()=>{
   console.log("시도별현황 renders")
 
   const sido=["서울", "제주", "경남", "경북", "전남", "전북", "충남", "충북", "강원", "경기", "세종", "울산", "대전", "광주", "인천", "대구", "부산", "강원"];
@@ -70,3 +70,5 @@ export default function ProvincialStatus(){
     </div>
   );
 }
+
+export default ProvincialStatus;

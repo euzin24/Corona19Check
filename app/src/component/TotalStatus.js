@@ -9,7 +9,7 @@ const TotalStatus = props => {
   console.log("전체현황 renders");
  
   useEffect(()=>{
-    const fetch = async ()=>{
+    const fetchData = async ()=>{
       setIsLoading(true)
 
       const res = await getCovid19InfStateJson(date)
@@ -18,7 +18,7 @@ const TotalStatus = props => {
       setIsLoading(false)
     }
     
-    // fetch()
+    // fetchData()
   }, [])
 
   return(

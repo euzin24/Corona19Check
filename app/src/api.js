@@ -13,19 +13,25 @@ export const getCovid19InfStateJson = async(date)=>{
     const url = `${CORS_BRIDGED}http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=${API_KEY}&pageNo=1&numOfRows=10&startCreateDt=${today}&endCreateDt=${today}`
     try{
         const res = await axios.get(url);
-        console.log(res.data.response.body.items.item)
         return res.data.response.body.items.item
     }catch(e){
         console.error(e);
     }
 }
 
-export const getCovid19SidoInfStateJson = async()=>{
+export const getCovid19SidoInfStateJson = async(st, ed)=>{
     console.log("시도별 현황 axios get")
-    const url = `${CORS_BRIDGED}http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19SidoInfStateJson?serviceKey=${API_KEY}&pageNo=1&numOfRows=10&startCreateDt=20200410&endCreateDt=20200411`
+    const stDate = "" + st.getFullYear()
+                      + ("0" + (1 + st.getMonth())).slice(-2)
+                      + ("0" + st.getDate()).slice(-2)
+    const edDate = "" + ed.getFullYear()
+                      + ("0" + (1 + ed.getMonth())).slice(-2)
+                      + ("0" + ed.getDate()).slice(-2)
+    console.log(stDate, edDate)
+    const url = `${CORS_BRIDGED}http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19SidoInfStateJson?serviceKey=${API_KEY}&pageNo=1&numOfRows=10&startCreateDt=${stDate}&endCreateDt=${edDate}`
     try{
         const res = await axios.get(url);
-        console.log(res);
+        return res.data.response.body.items.item
     }catch(e){
         console.error(e);
     }

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getCovid19VaccineCenter } from '../api'
+import VMap from './VMap'
 
 const VaccinationCenter = props => {
   // const data = JSON.parse(localStorage.getItem("vaccineCenter"))
@@ -127,7 +128,7 @@ const VaccinationCenter = props => {
     <div className="container">
       <p className="sb-title">예방접종센터 찾기</p>
       <div className="vc-container">
-        <div className="vmap-container">
+        {/* <div className="vmap-container">
           <div id="vmap"></div>
           <div id="buttons">
           <button type="button" 
@@ -137,7 +138,8 @@ const VaccinationCenter = props => {
           // onclick="javascript:move(14679304.585522275, 4472545.1240446,14);" 
           >독도</button>
           </div>
-        </div>
+        </div> */}
+        <VMap></VMap>
         <div className="center-list">
           {isLoading ? (
             <div>loading...</div>

@@ -6,7 +6,7 @@ vw.ol3.MapOptions = {
   , homePosition: vw.ol3.CameraPosition
   , initPosition: vw.ol3.CameraPosition
 };
- 
+
 var vmap = new vw.ol3.Map("vmap",  vw.ol3.MapOptions);
 
 function move(x,y,z){

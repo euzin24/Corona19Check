@@ -38,10 +38,7 @@ const App = ()=>{
           {/* <ProvincialStatus date={date}></ProvincialStatus> */}
         </div>
         <div id="vaccination" className="section">
-          <VaccinationCenter
-            provinceList={provinceList}
-            provincesDataObj={provincesDataObj}
-          ></VaccinationCenter>
+          <VaccinationCenter></VaccinationCenter>
         </div>
       </div>
       <footer>

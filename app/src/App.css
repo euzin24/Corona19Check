@@ -108,13 +108,6 @@ p{
   margin-left: 1em;
 }
 
-.vmap{
-  width:100%;
-  height:350px;
-  left:0px;
-  top:0px
-}
-
 .psb-title {
   padding-bottom: 1em;
   font-size: 2em;
@@ -135,7 +128,7 @@ p{
   display: inline-block;
 }
 
-.vmap-test {
+.vmap-container {
   background-color: blanchedalmond;
   width: 50%;
   float: left;
@@ -145,4 +138,11 @@ p{
   background-color: rgb(204, 204, 204);
   width: 50%;
   float: right;
+}
+
+.vmap{
+  width:100%;
+  height:350px;
+  left:0px;
+  top:0px
 }

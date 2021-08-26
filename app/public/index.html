@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
-      name="description"
-      content="Web site created using create-react-app"
+    name="description"
+    content="Web site created using create-react-app"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
@@ -19,27 +19,54 @@
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
-
+      
       Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <!-- 지도 api -->
-    <!-- <script type="text/javascript" src="//map.vworld.kr/js/vworldMapInit.js.do?version=2.0&apiKey=C43B3DE3-7F57-3A35-B63F-933E87630FBC"></script> -->
-    <title>React App</title>
+    <script type="text/javascript" src="//map.vworld.kr/js/vworldMapInit.js.do?version=2.0&apiKey=C43B3DE3-7F57-3A35-B63F-933E87630FBC"></script> 
+    <title>Corona19Check</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+    <!-- <div id="vmap" style="width:100%;height:350px;left:0px;top:0px"></div>
+    <div id="buttons">
+      <button type="button" onclick="move(14129709.590359,4512313.7639686,15);" >여의도</button>
+      <button type="button" onclick="move(14679304.585522275, 4472545.1240446,14);" >독도</button>
+    </div>
+    <script type="text/javascript">
+      vw.ol3.MapOptions = {
+          basemapType: vw.ol3.BasemapType.GRAPHIC
+        , controlDensity: vw.ol3.DensityType.EMPTY
+        , interactionDensity: vw.ol3.DensityType.BASIC
+        , controlsAutoArrange: true
+        , homePosition: vw.ol3.CameraPosition
+        , initPosition: vw.ol3.CameraPosition
+      };
+        
+      var vmap = new vw.ol3.Map("vmap",  vw.ol3.MapOptions);
+      
+      function move(x,y,z){
+        console.log("moved");
+        var _center = [ x, y ];
+        
+        var z = z;
+        var pan = ol.animation.pan({
+          duration : 2000,
+          source : (vmap.getView().getCenter())
+        });
+        vmap.beforeRender(pan);
+        vmap.getView().setCenter(_center);
+        setTimeout("fnMoveZoom()", 3000);
+        }
+        
+        function fnMoveZoom() {
+          zoom = vmap.getView().getZoom();
+          if (16 > zoom) {
+            vmap.getView().setZoom(14);
+        }
+      };
+    </script> -->
   </body>
 </html>

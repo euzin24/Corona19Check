@@ -40,11 +40,8 @@ const ProvincialStatus = (props)=>{
 
       setIsLoading(false)
     }
+    
     fetchData()
-
-    // if(isChanged){
-    //   setIsChanged(false);
-    // }
   }, [count])
 
   return(

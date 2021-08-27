@@ -7,33 +7,46 @@ const VaccinationCenter = props => {
   console.log("백신센터 renders")
 
   const [isLoading, setIsLoading] = useState(true)
-  const [data, setData] = useState([]);
   const [selectedProvince, setSelectedProvince] = useState("서울");
+  const [selectedCenterInfo, setSelectedCenterInfo] = useState({});
   const [page, setPage] = useState(1)
+  
+  const [data, setData] = useState([]);
   const [provinceList, setProvinceList] = useState([]);
   const [provincesDataObj, setProvincesDataObj] = useState({});
   let contentList = provincesDataObj[selectedProvince] || 0;
 
   const showListByPage=()=>{
     let temp=null
+    const list_item = (val, idx)=>{
+      return (
+        <li key={idx}>
+          <span className="toggle-title">{val.centerName}</span>
+          <button type="button" className="toggle-btn" 
+            onClick={()=>{
+              console.log("setSElectedCenterInfo", val.id, val.centerName, val.facilityName, val.address, val.lat, val.long)
+              setSelectedCenterInfo({
+                centerName: val.centerName,
+                facilityName: val.facilityName,
+                address: val.address,
+                lat: val.lat,
+                lng: val.lng
+              })
+            }}>위치확인</button>
+        </li>
+      ) 
+    } 
+
     if(contentList!==0){
       if(page*10 > contentList.length){
         temp=contentList.slice((page-1)*10, contentList.length);
         return temp.map((val, idx)=>{
-          return (
-            <li key={idx}>
-              {val.centerName}
-            </li>
-          )
+          return list_item(val, idx)
         })
       }else{
         temp=contentList.slice((page-1)*10, page*10);
         return temp.map((val, idx) => {
-          return (
-            <li key={idx}>
-              {val.centerName}
-            </li>
-          )
+          return list_item(val, idx)
         })
       }
     }
@@ -65,8 +78,6 @@ const VaccinationCenter = props => {
 
   // 데이터 fetching
   useEffect(()=>{
-    console.log("백신센터 useEffect1")
-
     const fetchData = async ()=>{
       console.log("API call to fetch Data")
       setIsLoading(true)
@@ -84,14 +95,10 @@ const VaccinationCenter = props => {
 
   // 데이터 가공
   useEffect(()=>{
-    console.log("백신센터 useEffect2")
-
     setIsLoading(true)
     if(data.length > 0){
       const _provinceList = new Set();
       const _provincesDataObj = new Object;
-  
-      console.log("vaccine center data processing")
   
       data.forEach(val=>{
         let temp = null;
@@ -116,8 +123,6 @@ const VaccinationCenter = props => {
         _provinceList.add(key);
         _provincesDataObj[key]===undefined ? _provincesDataObj[key] = [val] : _provincesDataObj[key].push(val)
       })
-      console.log(_provinceList)
-      console.log(_provincesDataObj)
       setProvinceList(_provinceList)
       setProvincesDataObj(_provincesDataObj)
     }
@@ -128,18 +133,7 @@ const VaccinationCenter = props => {
     <div className="container">
       <p className="sb-title">예방접종센터 찾기</p>
       <div className="vc-container">
-        {/* <div className="vmap-container">
-          <div id="vmap"></div>
-          <div id="buttons">
-          <button type="button" 
-          // onclick="javascript:move(14129709.590359,4512313.7639686,15);" 
-          >여의도</button>
-          <button type="button" 
-          // onclick="javascript:move(14679304.585522275, 4472545.1240446,14);" 
-          >독도</button>
-          </div>
-        </div> */}
-        <VMap></VMap>
+        <VMap data={selectedCenterInfo}></VMap>
         <div className="center-list">
           {isLoading ? (
             <div>loading...</div>

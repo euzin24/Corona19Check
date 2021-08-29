@@ -3,11 +3,11 @@ import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/themes/airbnb.css";
 import { getCovid19SidoInfStateJson } from '../api'
 
-const ProvincialStatus = (props)=>{
+const ProvincialStatus = ({date})=>{
   console.log("시도별현황 renders")
 
   const sido=["합계", "서울", "제주", "경남", "경북", "전남", "전북", "충남", "충북", "강원", "경기", "세종", "울산", "대전", "광주", "인천", "대구", "부산", "강원"];
-  const today = props.date
+  const today = date
 
   const [isLoading, setIsLoading] = useState(false)
   const [stDate, setStDate] = useState(today);
@@ -64,7 +64,7 @@ const ProvincialStatus = (props)=>{
           value={edDate}
           options={{ minDate: dateToString(stDate), maxDate: dateToString(today) }}
           onChange={([date])=>setEdDate(date)} ></Flatpickr>
-        <button className="sel-btn" onClick={btnOnClick}>확인하기</button>
+        <button className="sel-btn" onClick={btnOnClick}>조회하기</button>
       </span>
       <div className="ps-board">
         {isLoading ? (
@@ -74,17 +74,32 @@ const ProvincialStatus = (props)=>{
             {data===undefined ? (
               <div>데이터가 없습니다.</div>
             ):(
-              <ul>
-                {data.reverse().map((val, idx)=>{
-                  if(val.gubun===selectedSido){
-                    return <li key={idx}>
-                      <span>데이터 생성일: {val.createDt}   </span>
-                      <span>누적 확진자 수: {val.defCnt}   </span>
-                      <span>누적 사망자 수: {val.deathCnt}</span>
-                      </li>
-                  }
-                })}
-              </ul>
+              <table className="ps-datalist">
+                <thead>
+                  <tr>
+                    <th>기준일시</th>
+                    <th>누적 확진자 (전일대비 증감 수)</th>
+                    <th>격리중 환자</th>
+                    <th>지역 발생</th>
+                    <th>해외 유입</th>
+                    <th>누적 사망자</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data.reverse().map((val, idx)=>{
+                    if(val.gubun===selectedSido){
+                      return <tr key={idx}>
+                        <td>{val.createDt.slice(0, 10)}</td>
+                        <td>{val.defCnt} (+{val.incDec})</td>
+                        <td>{val.isolIngCnt}</td>
+                        <td>{val.localOccCnt}</td>
+                        <td>{val.overFlowCnt}</td>
+                        <td>{val.deathCnt}</td>
+                      </tr>
+                    }
+                  })}
+                </tbody>
+              </table>
             )}
           </>
         )}

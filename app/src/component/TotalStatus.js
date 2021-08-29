@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { getCovid19InfStateJson } from "../api";
 
-const TotalStatus = props => {
-  const date = props.date
-
+const TotalStatus = ({date}) => {
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   console.log("전체현황 renders");

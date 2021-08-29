@@ -11,15 +11,6 @@ const App = ()=>{
   const provinceList = new Set();
   const provincesDataObj = new Object();
 
-  useEffect(()=>{
-    // console.log("앱 useEffect")
-
-    // if(localStorage.getItem("vaccineCenter")===null){
-    //   console.log("vaccineCenter API call");
-    //   getVaccineCenterData();
-    // }
-  }, [])
-
   return (
     <div className="App">
       <nav className="nav-bar">

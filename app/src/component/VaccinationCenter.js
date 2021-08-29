@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { getCovid19VaccineCenter } from '../api'
-import VMap from './VMap'
+import Map from './Map'
 
-const VaccinationCenter = props => {
+const VaccinationCenter = () => {
   // const data = JSON.parse(localStorage.getItem("vaccineCenter"))
   console.log("백신센터 renders")
-
+  
   const [isLoading, setIsLoading] = useState(true)
   const [selectedProvince, setSelectedProvince] = useState("서울");
   const [selectedCenterInfo, setSelectedCenterInfo] = useState({});
@@ -16,26 +16,29 @@ const VaccinationCenter = props => {
   const [provincesDataObj, setProvincesDataObj] = useState({});
   let contentList = provincesDataObj[selectedProvince] || 0;
 
+  const [mapCenter, setMapcenter] = useState([37, 127]);
+  const [mapZoom, setMapZoom] = useState(6);
+
+  //지도 위치이동
+  const onClickHandler = (e)=>{
+    const lat = e.target.getAttribute('lat');
+    const lng = e.target.getAttribute('lng');
+    console.log(e.target.getAttribute('data'))
+
+    setMapcenter([lat, lng]);
+    setMapZoom(16);
+  }
+  
   const showListByPage=()=>{
     let temp=null
-    const list_item = (val, idx)=>{
-      return (
+    const list_item = (val, idx)=>
+      (
         <li key={idx}>
           <span className="toggle-title">{val.centerName}</span>
-          <button type="button" className="toggle-btn" 
-            onClick={()=>{
-              console.log("setSElectedCenterInfo", val.id, val.centerName, val.facilityName, val.address, val.lat, val.long)
-              setSelectedCenterInfo({
-                centerName: val.centerName,
-                facilityName: val.facilityName,
-                address: val.address,
-                lat: val.lat,
-                lng: val.lng
-              })
-            }}>위치확인</button>
+          <button className="toggle-btn" lat={val.lat} lng={val.lng} data={val}
+            onClick={onClickHandler}>위치확인</button>
         </li>
-      ) 
-    } 
+      )
 
     if(contentList!==0){
       if(page*10 > contentList.length){
@@ -133,12 +136,13 @@ const VaccinationCenter = props => {
     <div className="container">
       <p className="sb-title">예방접종센터 찾기</p>
       <div className="vc-container">
-        <VMap data={selectedCenterInfo}></VMap>
+        {/* <VMap data={selectedCenterInfo}></VMap> */}
+        <Map center={mapCenter} zoom={mapZoom}></Map>
         <div className="center-list">
           {isLoading ? (
             <div>loading...</div>
           ) : (
-            <>
+            <div>
               <span>
                 <select className="sel" onChange={onChange}>
                   {Array.from(provinceList).map((val, idx)=><option key={idx}>{val}</option>)}
@@ -159,7 +163,7 @@ const VaccinationCenter = props => {
               <ul style={{textAlign:"left"}}>
                 {showListByPage()}
               </ul>
-            </>
+            </div>
           )}
         </div>
       </div>

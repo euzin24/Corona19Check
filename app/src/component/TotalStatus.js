@@ -16,7 +16,7 @@ const TotalStatus = ({date}) => {
       setIsLoading(false)
     }
     
-    // fetchData()
+    fetchData()
   }, [])
 
   return(

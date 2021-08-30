@@ -2,15 +2,19 @@ import { useState, useEffect } from 'react';
 import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/themes/airbnb.css";
 import { getCovid19SidoInfStateJson } from '../api'
+import BarChart from './BarChart';
 
 const ProvincialStatus = ({date})=>{
   console.log("시도별현황 renders")
 
   const sido=["합계", "서울", "제주", "경남", "경북", "전남", "전북", "충남", "충북", "강원", "경기", "세종", "울산", "대전", "광주", "인천", "대구", "부산", "강원"];
-  const today = date
+  const today = new Date(date)
+  const aWeekBeforeToday = new Date(date)
+  aWeekBeforeToday.setDate(today.getDate()-7)
+  console.log(aWeekBeforeToday)
 
   const [isLoading, setIsLoading] = useState(false)
-  const [stDate, setStDate] = useState(today);
+  const [stDate, setStDate] = useState(aWeekBeforeToday);
   const [edDate, setEdDate] = useState(today);
   const [data, setData] = useState([]);
   const [count, setCount] = useState(0);
@@ -74,11 +78,12 @@ const ProvincialStatus = ({date})=>{
             {data===undefined ? (
               <div>데이터가 없습니다.</div>
             ):(
+              <>
               <table className="ps-datalist">
                 <thead>
                   <tr>
                     <th>기준일시</th>
-                    <th>누적 확진자 (전일대비 증감 수)</th>
+                    <th>누적 확진자<br></br>(전일대비 증감 수)</th>
                     <th>격리중 환자</th>
                     <th>지역 발생</th>
                     <th>해외 유입</th>
@@ -100,6 +105,10 @@ const ProvincialStatus = ({date})=>{
                   })}
                 </tbody>
               </table>
+              <div className="bar-chart">
+                <BarChart data={data} selectedSido={selectedSido}></BarChart>
+              </div>
+              </>
             )}
           </>
         )}

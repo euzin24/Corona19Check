@@ -8,8 +8,8 @@ import { useEffect, useState } from 'react';
 const App = ()=>{
   console.log("앱 renders")
   const date = new Date();
-  const provinceList = new Set();
-  const provincesDataObj = new Object();
+  const yesterday = new Date(date)
+  yesterday.setDate(date.getDate()-1)
 
   return (
     <div className="App">
@@ -23,13 +23,13 @@ const App = ()=>{
       </nav>
       <div>
         <div id="total-status" className="section">
-          {/* <TotalStatus date={date}></TotalStatus> */}
+          {/* <TotalStatus date={yesterday}></TotalStatus> */}
         </div>
         <div id="provincial-status" className="section">
-          {/* <ProvincialStatus date={date}></ProvincialStatus> */}
+          <ProvincialStatus date={date}></ProvincialStatus>
         </div>
         <div id="vaccination" className="section">
-          <VaccinationCenter></VaccinationCenter>
+          {/* <VaccinationCenter></VaccinationCenter> */}
         </div>
       </div>
       <footer>

@@ -4,7 +4,6 @@ import VaccinationCenter from './component/VaccinationCenter';
 import './App.css';
 
 const App = ()=>{
-  console.log("앱 renders")
   const date = new Date();
   const yesterday = new Date(date)
   yesterday.setDate(date.getDate()-1)
@@ -21,10 +20,10 @@ const App = ()=>{
       </nav>
       <div>
         <div id="total-status" className="section">
-          {/* <TotalStatus date={yesterday}></TotalStatus> */}
+          <TotalStatus date={yesterday}></TotalStatus>
         </div>
         <div id="provincial-status" className="section">
-          {/* <ProvincialStatus date={date}></ProvincialStatus> */}
+          <ProvincialStatus date={date}></ProvincialStatus>
         </div>
         <div id="vaccination" className="section">
           <VaccinationCenter></VaccinationCenter>

@@ -3,9 +3,6 @@ import { getCovid19VaccineCenter } from '../api'
 import Map from './Map'
 
 const VaccinationCenter = () => {
-  // const data = JSON.parse(localStorage.getItem("vaccineCenter"))
-  console.log("백신센터 renders")
-  
   const [isLoading, setIsLoading] = useState(true)
   const [selectedProvince, setSelectedProvince] = useState("서울");
   const [selectedCenterInfo, setSelectedCenterInfo] = useState({});
@@ -22,13 +19,12 @@ const VaccinationCenter = () => {
   const onClickHandler = (e)=>{
     const row = contentList.find(val=>val.id===Number(e.target.id))
     
-    //센터 정보 업데이트
+    //선택된 센터 정보 업데이트
     setSelectedCenterInfo({
       centerName: row.centerName,
       facilityName: row.facilityName,
       address: row.address,
       phoneNumber: row.phoneNumber,
-      zipcode: row.zipcode
     })
 
     //지도 위치 이동
@@ -40,10 +36,10 @@ const VaccinationCenter = () => {
     let temp=null
     const list_item = (val, idx)=>{
       return (
-        <li key={idx}>
-          <span className="toggle-title">{val.centerName}</span>
+        <li className="vc-li" key={idx}>
+          <span><b>{val.centerName}</b></span>
           <button className="toggle-show" id={val.id}
-            onClick={onClickHandler}>위치확인</button>
+            onClick={onClickHandler}>자세히보기</button>
         </li>
       )
     }
@@ -115,7 +111,7 @@ const VaccinationCenter = () => {
     setIsLoading(true)
     if(data.length > 0){
       const _provinceList = new Set();
-      const _provincesDataObj = new Object;
+      const _provincesDataObj = new Object();
   
       data.forEach(val=>{
         let temp = null;
@@ -158,36 +154,39 @@ const VaccinationCenter = () => {
           ) : (
             <>
             <div className="center-list">
-              <span>
-                <select className="sel" onChange={onChange}>
+              <span style={{verticalAlign:"middle"}}>
+                <select className="sel-prov" onChange={onChange}>
                   {Array.from(provinceList).map((val, idx)=><option key={idx}>{val}</option>)}
                 </select>
-                <span>총 {provincesDataObj[selectedProvince]===undefined ? null : provincesDataObj[selectedProvince].length}군데</span>
-                {page} / {Math.ceil(contentList.length/10)}
-                <button 
-                    disabled={prevBtnControl()}
-                    name="btn-prev"
-                    onClick={changePage}
-                    >이전</button>
-                <button
-                    disabled={nextBtnControl()}
-                    name="btn-next"
-                    onClick={changePage}
-                    >다음</button>
+                총 {provincesDataObj[selectedProvince]===undefined ? null : provincesDataObj[selectedProvince].length}군데
               </span>
-              <ul style={{textAlign:"left"}}>
+              <ul className="vc-ul">
                 {showListByPage()}
               </ul>
+                <span style={{verticalAlign:"middle"}}>
+                  <button className="btn-prev"
+                      disabled={prevBtnControl()}
+                      name="btn-prev"
+                      onClick={changePage}
+                      >《</button>
+                  <span>{page} / {Math.ceil(contentList.length/10)}</span>
+                  <button className="btn-next"
+                      disabled={nextBtnControl()}
+                      name="btn-next"
+                      onClick={changePage}
+                      >》</button>
+                </span>
             </div>
             <div className="description">
               <button className="toggle-hide">X</button>
-              <p>
-                센터명: {selectedCenterInfo.centerName} <br></br>
-                시설명: {selectedCenterInfo.facilityName} <br></br>
-                전화번호 : {selectedCenterInfo.phoneNumber} <br></br>
-                주소: {selectedCenterInfo.address} <br></br>
-                우편번호: {selectedCenterInfo.zipcode}
-              </p>
+              <img className="img" src="./building.png"></img>
+              <div className="desc-content">
+                <br></br>
+                <p><b>센터명</b> {selectedCenterInfo.centerName}</p>
+                <p><b>시설명</b> {selectedCenterInfo.facilityName}</p>
+                <p><b>주소</b> {selectedCenterInfo.address}</p>               
+                <p><b>전화번호</b> {selectedCenterInfo.phoneNumber}</p>
+              </div>
             </div>
             </>
           )}

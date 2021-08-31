@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet'
 import "leaflet/dist/leaflet.css";
 import L from 'leaflet';
 import '../App.css'
@@ -16,7 +16,7 @@ L.Icon.Default.mergeOptions({
 
 const ChangeView = ({center, zoom})=>{
   const map = useMap();
-  map.flyTo(center, zoom, 2)
+  map.flyTo(center, zoom, 0.5)
   return null
 }
 
@@ -29,11 +29,7 @@ const Map = ({center, zoom})=>{
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
         />
-        <Marker title="sjkdahkjsdh" position={center}>
-          <Popup>
-            <span>A pretty CSS3 popup. <br /> Easily customizable.</span>
-          </Popup>
-        </Marker>
+        <Marker position={center}></Marker>
       </MapContainer>
     </div>
   )

@@ -5,7 +5,6 @@ const CORS_BRIDGED = "https://cors.bridged.cc/"
 // const CORS_ANYWHERE = "https://cors-anywhere.herokuapp.com/"
 
 const dateToString = (date)=>{
-    console.log("dateToString", date)
     return "" + date.getFullYear() + ("0" + (1 + date.getMonth())).slice(-2) + ("0" + date.getDate()).slice(-2)
 }
 
@@ -26,7 +25,6 @@ export const getCovid19SidoInfStateJson = async(st, ed)=>{
     console.log("시도별 현황 axios get")
     const stDate = dateToString(st)
     const edDate = dateToString(ed)
-    console.log(stDate, edDate)
     const url = `${CORS_BRIDGED}http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19SidoInfStateJson?serviceKey=${API_KEY}&pageNo=1&numOfRows=10&startCreateDt=${stDate}&endCreateDt=${edDate}`
     try{
         const res = await axios.get(url);
@@ -41,7 +39,6 @@ export const getCovid19VaccineCenter = async()=>{
     const url = `${CORS_BRIDGED}https://api.odcloud.kr/api/15077586/v1/centers?page=1&perPage=284&serviceKey=${API_KEY}`
     try{
         const res = await axios.get(url);
-        console.log(res)
         return res.data.data;
     }catch(e){
         console.error(e);

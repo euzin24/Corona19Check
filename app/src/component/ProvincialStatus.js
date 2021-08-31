@@ -5,20 +5,17 @@ import { getCovid19SidoInfStateJson } from '../api'
 import BarChart from './BarChart';
 
 const ProvincialStatus = ({date})=>{
-  console.log("시도별현황 renders")
-
   const sido=["합계", "서울", "제주", "경남", "경북", "전남", "전북", "충남", "충북", "강원", "경기", "세종", "울산", "대전", "광주", "인천", "대구", "부산", "강원"];
   const today = new Date(date)
   const aWeekBeforeToday = new Date(date)
   aWeekBeforeToday.setDate(today.getDate()-7)
-  console.log(aWeekBeforeToday)
 
   const [isLoading, setIsLoading] = useState(false)
   const [stDate, setStDate] = useState(aWeekBeforeToday);
   const [edDate, setEdDate] = useState(today);
   const [data, setData] = useState([]);
   const [count, setCount] = useState(0);
-  const [selectedSido, setSelectedSido] = useState("서울"); //default
+  const [selectedSido, setSelectedSido] = useState("합계"); //default
 
   const onChange = e => {
     setSelectedSido(e.target.value)
@@ -39,7 +36,6 @@ const ProvincialStatus = ({date})=>{
       setIsLoading(true)
 
       const res = await getCovid19SidoInfStateJson(stDate, edDate)
-      console.log(res)
       setData(res)
 
       setIsLoading(false)
@@ -53,7 +49,7 @@ const ProvincialStatus = ({date})=>{
       <p className="psb-title">시도별 현황</p>
       <span>
         위치  
-        <select id="sido" className="sel" onChange={onChange}>
+        <select id="sido" className="sel-loc" onChange={onChange}>
           {sido.map((val, idx)=><option key={idx}>{val}</option>)}
         </select>
         시작일
@@ -79,7 +75,8 @@ const ProvincialStatus = ({date})=>{
               <div>데이터가 없습니다.</div>
             ):(
               <>
-              <table className="ps-datalist">
+              <div className="ps-datalist">
+              <table className="ps-table">
                 <thead>
                   <tr>
                     <th>기준일시</th>
@@ -92,8 +89,8 @@ const ProvincialStatus = ({date})=>{
                 </thead>
                 <tbody>
                   {data.reverse().map((val, idx)=>{
-                    if(val.gubun===selectedSido){
-                      return <tr key={idx}>
+                    return val.gubun===selectedSido ? (
+                      <tr key={idx}>
                         <td>{val.createDt.slice(0, 10)}</td>
                         <td>{val.defCnt} (+{val.incDec})</td>
                         <td>{val.isolIngCnt}</td>
@@ -101,10 +98,11 @@ const ProvincialStatus = ({date})=>{
                         <td>{val.overFlowCnt}</td>
                         <td>{val.deathCnt}</td>
                       </tr>
-                    }
+                    ) : null
                   })}
                 </tbody>
               </table>
+              </div>
               <div className="bar-chart">
                 <BarChart data={data} selectedSido={selectedSido}></BarChart>
               </div>

@@ -48,7 +48,8 @@ p{
   display: inline-block;
   margin: 1em;
 }a{
-  text-decoration: none
+  text-decoration: none;
+  color: black;
 }
 
 .section {
@@ -94,7 +95,7 @@ p{
   font-size: 1.2em;
 }
 
-.sel{
+.sel-loc{
   padding: 0.3em;
   font-size: 1em;
   margin-left: 1em;
@@ -132,10 +133,14 @@ p{
 .ps-datalist{
   background-color: rgb(231, 231, 231);;
   width: 100%;
-  margin: auto;
-  padding: 1em;
   max-height: 40vh;
   overflow-y: auto;
+}
+
+.ps-table{
+  width: 100%;
+  margin: auto;
+  padding: 1em;
 }
 
 .bar-chart{
@@ -147,25 +152,113 @@ p{
 .vc-container {
   width: 100%;
   display: inline-block;
+  border: 0.5px solid rgb(231, 231, 231)
 }
 
 .center-info {
-  background-color: rgb(204, 204, 204);
+  background-color: rgb(231, 231, 231);
   width: 40%;
   float: right;
   height: 70vh;
 }
 
+.sel-prov{
+  padding: 0.3em;
+  font-size: 1em;
+  margin-right: 1em;
+  margin-top: 0.5em;
+  /* float: left */
+}
+.btn-prev{
+  margin-right: 1em;
+  font-size: 1em;
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+}
+
+.btn-next{
+  margin-left: 1em;
+  font-size: 1em;
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+}
+
 .center-list {
   position: absolute;
-  background-color: burlywood;
+  width: 32%;
+  height: 70vh;
+  margin: auto;
   z-index: 1;
+  text-align: center;
+}
+
+.vc-ul{
+  display:inline-block;
+  padding-left: 0;
+  font-size: 1em;
+  text-align: left;
+  list-style: none;
+  width: 100%;
+  height: 58vh;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+.vc-li{
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-top: 1.8em;
+  margin-bottom: 1.8em;
+  font-size: 1em;
+  border-bottom: 1px solid rgb(182, 182, 182);
 }
 
 .description{
   position: absolute;
   width: 32%; /*(80*0.4)*/
   height: 70vh;
-  background-color: blanchedalmond;
+  background-color: #fff;
   z-index: 2;
+}
+
+.toggle-show{
+  float:right;
+  font-size: 0.8em;
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+}
+
+.toggle-hide{
+  float:right;
+  font-size: 1.2em;
+  padding: 0.5em;
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+  z-index: 2;
+}
+
+.desc-content{
+  z-index: 1;
+  text-align: left;
+  font-size: 1.2em;
+}
+
+.img{
+  width: 100%;
+  height: auto;
 }

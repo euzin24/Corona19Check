@@ -4,7 +4,7 @@ const BarChart = ({data, selectedSido})=>{
   const value = []
   const date = []
 
-  for(let i in data){
+  for(let i=data.length-1; i>=0; i--){
     if(data[i].gubun===selectedSido){
       value.push(data[i].defCnt);
       date.push(data[i].createDt.slice(5, 10))

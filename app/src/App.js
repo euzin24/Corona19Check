@@ -2,8 +2,6 @@ import TotalStatus from './component/TotalStatus';
 import ProvincialStatus from './component/ProvincialStatus';
 import VaccinationCenter from './component/VaccinationCenter';
 import './App.css';
-import { getCovid19VaccineCenter } from './api';
-import { useEffect, useState } from 'react';
 
 const App = ()=>{
   console.log("앱 renders")
@@ -26,10 +24,10 @@ const App = ()=>{
           {/* <TotalStatus date={yesterday}></TotalStatus> */}
         </div>
         <div id="provincial-status" className="section">
-          <ProvincialStatus date={date}></ProvincialStatus>
+          {/* <ProvincialStatus date={date}></ProvincialStatus> */}
         </div>
         <div id="vaccination" className="section">
-          {/* <VaccinationCenter></VaccinationCenter> */}
+          <VaccinationCenter></VaccinationCenter>
         </div>
       </div>
       <footer>

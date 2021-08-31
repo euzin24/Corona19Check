@@ -3,6 +3,10 @@ html {
   background-color: #f2f2f2;
 }
 
+body{
+  overflow-x: hidden;
+}
+
 h2{
   margin: 0.5em;
 }
@@ -134,20 +138,34 @@ p{
   overflow-y: auto;
 }
 
+.bar-chart{
+  background-color: rgb(255, 255, 255);
+  display: inline-block;
+  width: 100%;
+}
+
 .vc-container {
   width: 100%;
   display: inline-block;
 }
 
-.center-list {
+.center-info {
   background-color: rgb(204, 204, 204);
   width: 40%;
   float: right;
   height: 70vh;
 }
 
-.bar-chart{
-  background-color: rgb(255, 255, 255);
-  display: inline-block;
-  width: 100%;
+.center-list {
+  position: absolute;
+  background-color: burlywood;
+  z-index: 1;
+}
+
+.description{
+  position: absolute;
+  width: 32%; /*(80*0.4)*/
+  height: 70vh;
+  background-color: blanchedalmond;
+  z-index: 2;
 }

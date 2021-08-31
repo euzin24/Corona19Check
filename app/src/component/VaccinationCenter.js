@@ -19,26 +19,34 @@ const VaccinationCenter = () => {
   const [mapCenter, setMapcenter] = useState([37, 127]);
   const [mapZoom, setMapZoom] = useState(6);
 
-  //지도 위치이동
   const onClickHandler = (e)=>{
-    const lat = e.target.getAttribute('lat');
-    const lng = e.target.getAttribute('lng');
-    console.log(e.target.getAttribute('data'))
+    const row = contentList.find(val=>val.id===Number(e.target.id))
+    
+    //센터 정보 업데이트
+    setSelectedCenterInfo({
+      centerName: row.centerName,
+      facilityName: row.facilityName,
+      address: row.address,
+      phoneNumber: row.phoneNumber,
+      zipcode: row.zipcode
+    })
 
-    setMapcenter([lat, lng]);
+    //지도 위치 이동
+    setMapcenter([row.lat, row.lng]);
     setMapZoom(16);
   }
   
   const showListByPage=()=>{
     let temp=null
-    const list_item = (val, idx)=>
-      (
+    const list_item = (val, idx)=>{
+      return (
         <li key={idx}>
           <span className="toggle-title">{val.centerName}</span>
-          <button className="toggle-btn" lat={val.lat} lng={val.lng} data={val}
+          <button className="toggle-show" id={val.id}
             onClick={onClickHandler}>위치확인</button>
         </li>
       )
+    }
 
     if(contentList!==0){
       if(page*10 > contentList.length){
@@ -79,8 +87,14 @@ const VaccinationCenter = () => {
     setPage(1)
   }
 
-  // 데이터 fetching
   useEffect(()=>{
+    //toggle버튼 jquery script 삽입
+    const $ = document.querySelector('body')
+    const script = document.createElement('script')
+    script.src = "./toggle.js"
+    $.appendChild(script)
+    
+    // 데이터 fetching
     const fetchData = async ()=>{
       console.log("API call to fetch Data")
       setIsLoading(true)
@@ -96,8 +110,8 @@ const VaccinationCenter = () => {
       fetchData() : setData(JSON.parse(localStorage.getItem("vaccineCenter")))
   }, [])
 
-  // 데이터 가공
   useEffect(()=>{
+    // 데이터 가공
     setIsLoading(true)
     if(data.length > 0){
       const _provinceList = new Set();
@@ -138,11 +152,12 @@ const VaccinationCenter = () => {
       <div className="vc-container">
         {/* <VMap data={selectedCenterInfo}></VMap> */}
         <Map center={mapCenter} zoom={mapZoom}></Map>
-        <div className="center-list">
+        <div className="center-info">
           {isLoading ? (
             <div>loading...</div>
           ) : (
-            <div>
+            <>
+            <div className="center-list">
               <span>
                 <select className="sel" onChange={onChange}>
                   {Array.from(provinceList).map((val, idx)=><option key={idx}>{val}</option>)}
@@ -164,6 +179,17 @@ const VaccinationCenter = () => {
                 {showListByPage()}
               </ul>
             </div>
+            <div className="description">
+              <button className="toggle-hide">X</button>
+              <p>
+                센터명: {selectedCenterInfo.centerName} <br></br>
+                시설명: {selectedCenterInfo.facilityName} <br></br>
+                전화번호 : {selectedCenterInfo.phoneNumber} <br></br>
+                주소: {selectedCenterInfo.address} <br></br>
+                우편번호: {selectedCenterInfo.zipcode}
+              </p>
+            </div>
+            </>
           )}
         </div>
       </div>

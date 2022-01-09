@@ -1,5 +1,5 @@
 # Corona19Check
-대한민국 코로나19 현황 및 접종센터 조회 서비스
+대한민국 코로나19 현황 및 접종센터 조회 서비스<br>
 create-react-app 환경에서 개발한 웹 프론트엔드 프로젝트
 
 ## 사용스택
@@ -23,7 +23,7 @@ create-react-app 환경에서 개발한 웹 프론트엔드 프로젝트
 ![2](https://user-images.githubusercontent.com/53118384/148693051-e8f07a67-8bc8-422f-be8f-88a6f4613a8a.png)
 
 ### 3. 코로나19 예방접종센터 위치 조회 서비스
-![3](https://user-images.githubusercontent.com/53118384/148693055-5e05b4b6-e6a5-4f33-aeb5-ce738e94817c.png)
+![3](https://user-images.githubusercontent.com/53118384/148693055-5e05b4b6-e6a5-4f33-aeb5-ce738e94817c.png)<br>
 센터 선택 전
-![4](https://user-images.githubusercontent.com/53118384/148693057-68cfa366-12f5-481f-9133-248d9e347e3e.png)
+![4](https://user-images.githubusercontent.com/53118384/148693057-68cfa366-12f5-481f-9133-248d9e347e3e.png)<br>
 센터 선택 후
